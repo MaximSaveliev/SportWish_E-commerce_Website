@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace eUseControl.BusinessLogic.DBModel
 {
-    public class DbInitializer : DropCreateDatabaseAlways<UserContext>
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<UserContext>
     {
         protected override void Seed(UserContext context)
         {
