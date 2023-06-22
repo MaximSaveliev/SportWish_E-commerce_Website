@@ -1,5 +1,5 @@
-﻿@model IEnumerable<eUseControl.Domain.Entities.Product>
-
+﻿@model IEnumerable<eUseControl.Domain.Entities.Products.Product>
+@using eUseControl.Web.Extensions
 @{
     ViewBag.Title = "ListProducts";
     Layout = "~/Views/Shared/Layouts/_Admin.cshtml";
@@ -31,51 +31,45 @@
             @Html.DisplayNameFor(model => model.Category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tags)
+            @Html.DisplayNameFor(model => model.Images)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Currency)
+            @Html.DisplayNameFor(model => model.Sizes)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegularPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PromotionalPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tags)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.ActionLink("Edit",    "EditProduct",      new { id=item.Id }) |
-            @Html.ActionLink("Delete",  "DeleteProduct",    new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegularPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromotionalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Thumbnail)" style="max-width: 150px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sizes)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "AddProduct", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

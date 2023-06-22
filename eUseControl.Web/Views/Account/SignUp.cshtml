@@ -13,32 +13,45 @@
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                             Create an account
                         </h4>
 
-                        @Html.ValidationMessageFor(x => x.Name)
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            @Html.TextBoxFor(x => x.Name, new
+                        @Html.ValidationMessageFor(x => x.NickName, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.NickName, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "NickName" })
+                        <div class="bor8 how-pos4-parent">
+                            @Html.TextBoxFor(x => x.NickName, new
                             {
                                 @class = "stext-117 cl2 plh3 size-116 p-l-30 p-r-30",
-                                placeholder = "Name"
+                                placeholder = "NickName"
                             })
                         </div>
 
-                        @Html.ValidationMessageFor(x => x.Surname)
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            @Html.TextBoxFor(x => x.Surname, new
+                        @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.UserName, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "UserName" })
+                        <div class="bor8 how-pos4-parent">
+                            @Html.TextBoxFor(x => x.UserName, new
                             {
                                 @class = "stext-117 cl2 plh3 size-116 p-l-30 p-r-30",
-                                placeholder = "Surname"
+                                placeholder = "User Name"
                             })
                         </div>
 
-                        @Html.ValidationMessageFor(x => x.Email)
-                        <div class="bor8 m-b-20 how-pos4-parent">
+                        @Html.ValidationMessageFor(x => x.UserSurname, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.UserSurname, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "UserSurname" })
+                        <div class="bor8 how-pos4-parent">
+                            @Html.TextBoxFor(x => x.UserSurname, new
+                            {
+                                @class = "stext-117 cl2 plh3 size-116 p-l-30 p-r-30",
+                                placeholder = "User Surname"
+                            })
+                        </div>
+
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.Email, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "Email" })
+                        <div class="bor8 how-pos4-parent">
                             @Html.TextBoxFor(x => x.Email, new
                             {
                                 @class = "stext-117 cl2 plh3 size-116 p-l-30 p-r-30",
@@ -47,16 +60,19 @@
                             })
                         </div>
 
-                        @Html.ValidationMessageFor(x => x.Password)
-                        <div class="bor8 m-b-20 how-pos4-parent">
-                            @Html.PasswordFor(x => x.Password, new
+                        @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.Password, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "Password" })
+                        <div class="bor8 how-pos4-parent">
+                            @Html.TextBoxFor(x => x.Password, new
                             {
                                 @class = "stext-117 cl2 plh3 size-116 p-l-30 p-r-30",
-                                placeholder = "Password"
+                                placeholder = "Password",
+                                type = "password"
                             })
                         </div>
 
-                        @Html.ValidationMessageFor(x => x.ConfirmPassword)
+                        @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger p-l-5" })
+                        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "mtext-102 cl2 plh3 p-l-5 p-r-20", @for = "ConfirmPassword" })
                         <div class="bor8 m-b-20 how-pos4-parent">
                             @Html.PasswordFor(x => x.ConfirmPassword, new
                             {
@@ -76,6 +92,9 @@
                                 <button class="flex-c-m stext-101 cl0 size-118 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                                     Sign Up
                                 </button>
+                            </div>
+                            <div class="flex-b justify-content-center" style="margin-top: 10px">
+                                <p>Have already an account? <a href="@Url.Action("SignIn", "Account")" class="fw-bold text-register cl1">Login here</a></p>
                             </div>
                         </div>
                     }

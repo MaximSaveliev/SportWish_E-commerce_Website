@@ -1,39 +1,37 @@
-﻿using eUseControl.Domain.Entities;
+﻿using eUseControl.BusinessLogic.Core;
+using eUseControl.BusinessLogic.Interfaces;
+using eUseControl.Domain.Entities.Products;
+using eUseControl.Domain.Entities.Response;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace eUseControl.BusinessLogic.Services
 {
-    public abstract class ProductService : BaseService
+    public class ProductService : ProductApi, IProduct
     {
-        public static ServiceResponse<Product> Add(Product product)
+        public List<Product> GetProductList()
         {
-            DbContext.Products.Add(product);
-            DbContext.SaveChanges();
-            return Success(product);
+            return AllProducts();
         }
-
-        public static ServiceResponse<Product> Edit(Product product)
+        public Product GetProductById(int id)
         {
-            DbContext.Entry(product).State = System.Data.Entity.EntityState.Modified;
-            DbContext.SaveChanges();
-            return Success(product);
+            return ProductById(id);
         }
-
-        public static ServiceResponse<List<Product>> GetAll()
+        public Product GetProductByName(string productName)
         {
-            var entries = DbContext.Products
-                .ToList();
-
-            return Success(entries);
+            return ProductByName(productName);
         }
-
-        public static ServiceResponse<Product> GetById(int id)
+        public ServiceResponse ValidateEditProduct(Product product)
         {
-            var entry = DbContext.Products
-                .FirstOrDefault(x => x.Id == id);
-
-            return Success(entry);
+            return ReturnEditProductStatus(product);
+        }
+        public ServiceResponse ValidateDeleteProduct(Product product)
+        {
+            return ReturnDeleteProductStatus(product);
+        }
+        public ServiceResponse ValidateCreateProduct(ProductData product)
+        {
+            return ReturnCreateProductStatus(product);
         }
     }
 }

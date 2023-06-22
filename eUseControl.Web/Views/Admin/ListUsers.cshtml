@@ -1,0 +1,47 @@
+﻿@model List<eUseControl.Domain.Entities.User>
+@using eUseControl.Web.Extensions
+@{
+    ViewBag.Title = "ListUsers";
+    Layout = "~/Views/Shared/Layouts/_Admin.cshtml";
+}
+
+<div class="d-flex justify-content-center" style="font-size: 3em; font-weight: 500;">Users List</div>
+<table class="table" style="background-color:white;">
+    <thead>
+        <tr>
+            <th scope="col" class="pl-3">
+                @Html.DisplayNameFor(model => model[0].Id)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].NickName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].AccessLevel)
+            </th>
+            <th scope="col">
+                @Html.DisplayName("Action")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row" class="pl-3">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>@Html.DisplayFor(modelItem => item.NickName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.AccessLevel)</td>
+                @if (System.Web.HttpContext.Current.GetMySessionObject().AccessLevel == eUseControl.Domain.Enums.URole.ADMINISTRATOR)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

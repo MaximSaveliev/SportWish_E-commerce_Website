@@ -2,7 +2,7 @@
     <div class="logo">
         <link rel="icon" href="~/Content/images/favicon.ico">
 
-        <a href="/"    class="simple-text logo-mini">
+        <a href="@Url.Action("Index","Home")"    class="simple-text logo-mini">
             <div class="logo-image-small">
                 <img src="~/Content/images/favicon.ico" />
             </div>
@@ -28,9 +28,9 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/userProfile">
+                <a href="@Url.Action("AdminProfile","Admin")">
                     <i class="nc-icon nc-single-02"></i>
-                    <p>User Profile</p>
+                    <p>Admin Profile</p>
                 </a>
             </li>
             <li>

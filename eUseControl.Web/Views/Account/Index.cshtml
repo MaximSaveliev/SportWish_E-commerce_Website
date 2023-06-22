@@ -1,4 +1,6 @@
-﻿@{
+﻿@model eUseControl.Domain.Entities.User
+@using eUseControl.Web.Extensions
+@{
     ViewBag.Title = "Account";
 }
 
@@ -11,60 +13,128 @@
                         <div class="row mt-1">
                             <div class="col">
                                 <h4 class="mtext-105 cl2 p-b-30">
-                                    Profile Settings
+                                    @Html.DisplayFor(model => model.NickName)
+                                    Profile
                                 </h4>
                             </div>
                         </div>
 
-                        <div class="row mt-1">
-                            <div class="col-md-6">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Name</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter name">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Surname</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter surname">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Email</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter email">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Mobile</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter phone number">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Address</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter address">
-                            </div>
 
-                            <div class="col-md-6">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Country</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Country">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">State/Region</label>
-                                <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="State">
-                            </div>
-                            <div class="mt-3 p-l-17">
-                            <a href="/" class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" type="button">Save Profile</a>
-                            </div>
+                        <div class="relative overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-gray-900 uppercase dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Info
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Value
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-lg">
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.NickName)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.NickName)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.UserName)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.UserName)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.UserSurname)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.UserSurname)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.Email)
+                                        </td>
+                                    </tr>
+                                    @if (System.Web.HttpContext.Current.GetMySessionObject().AccessLevel == eUseControl.Domain.Enums.URole.ADMINISTRATOR) 
+                                    {
+                                        <tr class="bg-white dark:bg-gray-800">
+                                            <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                @Html.DisplayNameFor(model => model.AccessLevel)
+                                            </th>
+                                            <td class="px-6 py-2">
+                                                @Html.DisplayFor(model => model.AccessLevel)
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.ActionLink("Edit", "EditUser", new { id = System.Web.HttpContext.Current.GetMySessionObject().Id }) |
+                                            @Html.ActionLink("Back on Home Page", "Index", "Home")
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!----
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control mb-2" placeholder="Enter email" value=""></div>
-                            <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control mb-2" placeholder="Enter phone number" value=""></div>
-                            <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control mb-2" placeholder="Enter address" value=""></div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control mb-2" placeholder="Country" value=""></div>
-                            <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control mb-2" value="" placeholder="State"></div>
-                        </div>
-                       -->
-                        
+     <div class="row mt-1">
+         <div class="col-md-6">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Name</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter name">
+         </div>
+         <div class="col-md-6">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Surname</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter surname">
+         </div>
+         <div class="col-md-12">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Email</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter email">
+         </div>
+         <div class="col-md-12">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Mobile</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter phone number">
+         </div>
+         <div class="col-md-12">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Address</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Enter address">
+         </div>
+
+         <div class="col-md-6">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">Country</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="Country">
+         </div>
+         <div class="col-md-6">
+             <label class="mtext-102 cl2 plh3 p-l-5 p-r-20">State/Region</label>
+             <input class="stext-117 cl2 plh3 p-l-8 p-r-20" type="text" name="email" placeholder="State">
+         </div>
+         <div class="mt-3 p-l-17">
+         <a href="/" class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" type="button">Save Profile</a>
+         </div>
+     </div>
+
+     <div class="row mt-3">
+         <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control mb-2" placeholder="Enter email" value=""></div>
+         <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control mb-2" placeholder="Enter phone number" value=""></div>
+         <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control mb-2" placeholder="Enter address" value=""></div>
+     </div>
+     <div class="row mt-3">
+         <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control mb-2" placeholder="Country" value=""></div>
+         <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control mb-2" value="" placeholder="State"></div>
+     </div>
+    -->
+
                     </form>
-            </div>
+                </div>
             </div>
         </div>
     </section>

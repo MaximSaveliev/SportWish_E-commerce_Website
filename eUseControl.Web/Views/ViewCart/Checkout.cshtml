@@ -1,0 +1,94 @@
+﻿@model IEnumerable<eUseControl.Domain.Entities.Cart>
+@using eUseControl.Web.Extensions
+@{
+    ViewBag.Title = "Checkout";
+    var user = System.Web.HttpContext.Current.GetMySessionObject();
+}
+<div class="card">
+    <div class="card-top border-bottom text-center stext-107">
+        <a href="/shop"><i class="fa-solid fa-arrow-left"></i> Back to shop</a>
+        <span id="logo" class="stext-301">Checkout</span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="left border">
+                    <div class="row">
+                        <span class="header">Payment</span>
+                        <div class="icons">
+                            <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                            <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                            <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                        </div>
+                    </div>
+                    <form>
+                        <span>Card name:</span>
+                        <input placeholder="Name Surname">
+                        <span>Card Number:</span>
+                        <input placeholder="____-____-____-____">
+                        <div class="row">
+                            <div class="col-4">
+                                <span>Expiry date:</span>
+                                <input placeholder="YY/MM">
+                            </div>
+                            <div class="col-4">
+                                <span>CVV:</span>
+                                <input id="cvv">
+                            </div>
+                        </div>
+                        <input type="checkbox" id="save_card" class="align-left">
+                        <label for="save_card">Save card details to wallet</label>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="right border">
+
+                    @{
+                        var total = 0f;
+                        if (Model != null)
+                        {
+                            <div class="header">Order Summary</div>
+                            <p>@ViewBag.NumberOfProducts items</p>
+
+                            foreach (var product in Model)
+                            {
+                                total += product.Product.RegularPrice;
+                                <div class="row item">
+                                    <div class="col-4 align-self-center"><img class="img-fluid" src="@product.Product.Thumbnail"></div>
+                                    <div class="col-8">
+                                        <div class="row"><b>$ @product.Product.RegularPrice</b></div>
+                                        <div class="row text-muted">@product.Product.ProductName</div>
+                                        <div class="row">Qty:1</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+
+                    <hr>
+                    <div class="row lower">
+                        <div class="col text-left">Subtotal</div>
+                        <div class="col text-right">$ @total</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left">Delivery</div>
+                        <div class="col text-right">Free</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left"><b>Total to pay</b></div>
+                        <div class="col text-right"><b>$ @total</b></div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left"><a href="#"><u>Add promo code</u></a></div>
+                    </div>
+                    <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04 m-auto">Place order</button>
+                    <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+    </div>
+</div>

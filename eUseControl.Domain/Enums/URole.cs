@@ -2,8 +2,8 @@
 {
     public enum URole
     {
-        Guest, 
-        Customer,
-        Admin // User roles
+        // User Roles
+        USER,
+        ADMINISTRATOR
     }
 }

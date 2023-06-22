@@ -1,0 +1,77 @@
+﻿@model eUseControl.Domain.Entities.Products.Product
+@{
+    ViewBag.Title = "DeleteProduct";
+    Layout = "~/Views/Shared/Layouts/_Admin.cshtml";
+}
+
+<div class="d-flex justify-content-center" style="font-size: 2.5em; font-weight: 500;">Delete Product @Model.ProductName</div>
+<body>
+    <section style="margin-top: 45px; color:red">
+        <section class="container text-register" style="text-align: center">
+            <h3>Are you sure you want to delete this product - @Model.ProductName?</h3>
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BrandName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BrandName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RegularPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RegularPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PromotionalPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PromotionalPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Thumbnail)
+                    </dt>
+
+                    <dd>
+                        <img src="@Html.DisplayFor(model => model.Thumbnail)" />
+                    </dd>
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default text-register" /> |
+                        @Html.ActionLink("Back to List", "ListProducts", "Admin")
+                    </div>
+                }
+            </div>
+        </section>
+    </section>
+</body>
+

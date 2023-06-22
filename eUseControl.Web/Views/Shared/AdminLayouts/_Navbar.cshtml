@@ -1,4 +1,22 @@
-﻿
+﻿<style>
+    .btn-custom {
+        background-color: white;
+        color: #333;
+        border: none;
+        font-weight: 600;
+        font-size: 0.8751em;
+        line-height: 1.35em;
+        border-radius: 3px;
+        padding: 11px 22px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .btn-custom:hover {
+            background-color: #fcc468;
+            color: #4acccd;
+        }
+</style>
 <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container-fluid">
         <div class="navbar-wrapper">
@@ -17,6 +35,7 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <a href="@Url.Action("ListUsers","Admin")"class="btn-custom" style="margin: 0 30px 0 0;">Get Users List</a>
             <form>
                 <div class="input-group no-border">
                     <input type="text" value="" class="form-control" placeholder="Search...">

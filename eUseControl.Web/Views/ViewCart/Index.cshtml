@@ -1,12 +1,12 @@
-﻿
+﻿@model IEnumerable<eUseControl.Domain.Entities.Cart>
 @using eUseControl.Web.Extensions
-
 @{
     ViewBag.Title = "ViewCart";
+    var user = System.Web.HttpContext.Current.GetMySessionObject();
 }
 <div class="container">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="@Url.Action("Index","Home")" class="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -35,34 +35,36 @@
 
                                 @{
                                     var total = 0f;
-                                    var prodResp = eUseControl.BusinessLogic.Services.UserService.GetProductsInCart(Session.GetUser());
-                                    if (prodResp.Success)
+                                    var productTotal = 0f;
+                                    //var prodResp = eUseControl.BusinessLogic.Services.UserService.GetProductsInCart(Session.GetUser());
+                                    if (Model != null)
                                     {
-                                        foreach (var product in prodResp.Entry)
+                                        foreach (var product in Model)
                                         {
-                                            total += product.RegularPrice;
+                                            total += product.Product.RegularPrice * product.Quantity;
+                                            productTotal = product.Product.RegularPrice * product.Quantity;
                                             <tr class="table_row">
                                                 <td class="column-1">
-                                                    <div class="how-itemcart1">
-                                                        <img src="@product.Image0" alt="IMG">
+                                                    <div class="">
+                                                        <img src="@product.Product.Thumbnail" alt="IMG">
                                                     </div>
                                                 </td>
-                                                <td class="column-2">@product.ProductName</td>
-                                                <td class="column-3">$ @product.RegularPrice</td>
+                                                <td class="column-2 pl-4">@product.Product.ProductName</td>
+                                                <td class="column-3">$ @product.Product.RegularPrice</td>
                                                 <td class="column-4">
                                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                             <i class="fs-16 zmdi zmdi-minus"></i>
                                                         </div>
 
-                                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+                                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="@product.Quantity">
 
                                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                             <i class="fs-16 zmdi zmdi-plus"></i>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="column-5">$ @product.RegularPrice</td>
+                                                <td class="column-5">$ @productTotal </td>
                                             </tr>
                                         }
                                     }
@@ -142,11 +144,11 @@
                                 </div>
 
                                 <div class="bg0 m-b-6">
-                                    <input class="stext-111 cl8 plh3 size-111 m-b-12 m-t-9" type="text" name="state" placeholder="State /  country">
+                                    <input class="stext-111 cl8 plh3 size-111 m-b-12 m-t-9 p-lr-20" type="text" name="state" placeholder="State /  country">
                                 </div>
 
                                 <div class="bg0 m-b-22">
-                                    <input class="stext-111 cl8 plh3 size-111 m-b-12 m-t-9" type="text" name="postcode" placeholder="Postcode / Zip">
+                                    <input class="stext-111 cl8 plh3 size-111 m-b-12 m-t-9 p-lr-20" type="text" name="postcode" placeholder="Postcode / Zip">
                                 </div>
 
                                 <div class="flex-w">
@@ -174,7 +176,7 @@
                     </div>
 
                     <div class="flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer">
-                        <a href="/checkout" class="flex-c-m w-full stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">Proceed to Checkout</a>
+                        <a href="@Url.Action("Checkout","ViewCart")" class="flex-c-m w-full stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>

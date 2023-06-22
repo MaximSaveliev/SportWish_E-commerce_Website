@@ -1,0 +1,94 @@
+﻿@model eUseControl.Domain.Entities.User
+@using eUseControl.Web.Extensions
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/Layouts/_Admin.cshtml";
+}
+
+<body>
+    <section class="vh-100" style="background-color: white;">
+        <div class="container py-5 h-100">
+            <div class="mask d-flex h-100 gradient-custom-3">
+                <div class="size-210 p-lr-15-lg w-full-md">
+                    <form>
+                        <div class="row mt-1">
+                            <div class="col">
+                                <h4 class="mtext-105 cl2 p-b-30">
+                                    @Html.DisplayFor(model => model.NickName)
+                                    Profile
+                                </h4>
+                            </div>
+                        </div>
+
+
+                        <div class="relative overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-gray-900 uppercase dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-10 py-3">
+                                            Info
+                                        </th>
+                                        <th scope="col" class="px-10 py-3">
+                                            Value
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-lg">
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.NickName)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.NickName)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.UserName)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.UserName)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.UserSurname)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.UserSurname)
+                                        </td>
+                                    </tr>
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </th>
+                                        <td class="px-6 py-2">
+                                            @Html.DisplayFor(model => model.Email)
+                                        </td>
+                                    </tr>
+                                    @if (System.Web.HttpContext.Current.GetMySessionObject().AccessLevel == eUseControl.Domain.Enums.URole.ADMINISTRATOR)
+                                    {
+                                        <tr class="bg-white dark:bg-gray-800">
+                                            <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                @Html.DisplayNameFor(model => model.AccessLevel)
+                                            </th>
+                                            <td class="px-6 py-2">
+                                                @Html.DisplayFor(model => model.AccessLevel)
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr class="bg-white dark:bg-gray-800">
+                                        <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @Html.ActionLink("Edit", "EditUser", new { id = System.Web.HttpContext.Current.GetMySessionObject().Id }) |
+                                            @Html.ActionLink("Back to List", "Dashboard", "Admin")
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

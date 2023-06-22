@@ -5,11 +5,8 @@ namespace eUseControl.BusinessLogic.DBModel
 {
     public class UserContext : DbContext
     {
-        public UserContext() 
-            : base("name=TEST_WEB_DB") { }
+        public UserContext() : base("name=TESTTEST") { }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Session> Sessions { get; set; }
-        public DbSet<Product> Products { get; set; }
     }
 }
